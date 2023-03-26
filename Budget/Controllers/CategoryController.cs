@@ -71,7 +71,6 @@ namespace Budget.Controllers
 
             return View(categoryId);
         }
-
         [HttpPost]
         public IActionResult DeleteConfirmed(int id)
         {
