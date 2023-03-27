@@ -1,0 +1,46 @@
+﻿@model Transaction
+@{
+    ViewData["Title"] = "Transaction Page";
+}
+<h1> HELLO! TRANSACTION PAGE HERE</h1>
+
+<div class="row text"> 
+    <div class="col-md-8">
+        <p>
+            <h1>Add new Transaction</h1>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input placeholder="@Model.Name" asp-for="Name" class="form-control" />
+                    </div>
+                     <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <input placeholder="@Model.Description" asp-for="Description" class="form-control />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Sum" class="control-label"></label>
+                        <input placeholder="@Model.Sum" asp-for="Sum" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DateTime" class="control-label"></label>
+                        <input placeholder="@Model.DateTime" asp-for="DateTime" type="datetime" class="form-control"/>
+                        <span asp-validation-for="DateTime" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CategoryId" class="control-label"></label>
+                        <input placeholder="@Model.CategoryId" asp-for="CategoryId" class="form-control"/>
+                        <span asp-validation-for="CategoryId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Confirm" class="btn btn-success"/>
+                        <a class="btn btn-outline-secondary" asp-action="Index">Go back</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>         

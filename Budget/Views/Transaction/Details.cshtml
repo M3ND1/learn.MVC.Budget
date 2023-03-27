@@ -1,0 +1,34 @@
+﻿@model Transaction
+@{
+    ViewData["Title"] = "Transaction Page";
+}
+<div class="row text"> 
+    <div class="col-md-8">
+        <p>
+            <h1>Transaction @Model.Name </h1>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                    <div class="form-group">
+                        <input class="form-control" value="@Model.Name" readonly/>
+                    </div>
+                     <div class="form-group">
+
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" value="@Model.Sum" readonly/>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" value="@Model.Description" readonly/>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" value="@Model.CategoryId" readonly/>
+                    </div>
+                    <div class="form-group">
+                        <a class="btn btn-info" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                        <a class="btn btn-outline-secondary" asp-action="Index">Show All</a>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>         

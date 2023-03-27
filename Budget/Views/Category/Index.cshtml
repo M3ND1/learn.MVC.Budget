@@ -3,12 +3,17 @@
     ViewData["Title"] = "Category Page";
 }
 <h1>HELLO! CATEGORY CONTROLLER</h1>
-<a class="btn btn-outline-success ml-4 mb-4" asp-action="Create">Create</a>
-<table class="table">
+<div class="float-end">
+    <a class="btn btn-outline-success ml-4 m-2" asp-action="Create">Create New</a>
+</div>
+<table class="table table-striped table-bordered">
     <thead>
         <tr> 
             <th>@Html.DisplayNameFor(model => model.Id)</th>
             <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th>Edit</th>
+            <th>Details</th>
+            <th>Delete</th>
         </tr>
     </thead>
     <tbody>
