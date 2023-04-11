@@ -3,12 +3,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Budget.Areas.Identity.Data;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Budget.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages().WithRazorPagesRoot("/Content");
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 //BudgetContext and IdentityContext
 builder.Services.AddDbContext<BudgetContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("myConnString")));

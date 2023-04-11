@@ -19,14 +19,14 @@ html {
 
 body {
     margin-bottom: 60px;
-    background-image: url("https://images.pexels.com/photos/4968384/pexels-photo-4968384.jpeg");
+/*    background-image: url("https://images.pexels.com/photos/4968384/pexels-photo-4968384.jpeg");
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: cover;*/
 }
 
 /* Navbar */
 
-nav {
+/*nav {
     background-color: rgba(0, 0, 0, 0.8);
     color: white;
 }
@@ -46,9 +46,9 @@ nav .navbar-brand {
 nav .navbar-brand:hover {
     color: black;
 }
-.navbar
+.navbar*/
 /* Nav hover*/
-.navbar-collapse {
+/*.navbar-collapse {
     justify-content: flex-end;
 }
 .navbar-brand:hover {
@@ -59,9 +59,9 @@ nav .navbar-brand:hover {
 }
 #login:hover {
     color: darkgray !important;
-}
+}*/
 /* Footer */
-footer {
+/*footer {
     background-color: rgba(0, 0, 0, 0.8);
     color: white;
     padding-top: 1rem;
@@ -76,8 +76,5 @@ footer {
 
 .footer a:hover {
     color: #ccc;
-}
-/* Login */
-.card login-logout-tab {
-    background-color: rgba(0, 0, 0, 0.8);
-}
+}*/
+
