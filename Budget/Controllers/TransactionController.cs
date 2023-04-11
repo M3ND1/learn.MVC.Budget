@@ -1,4 +1,5 @@
 ﻿using Budget.Data;
+using Budget.Interfaces;
 using Budget.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,49 +9,41 @@ namespace Budget.Controllers
 {
     public class TransactionController : Controller
     {
-        private readonly BudgetContext _context;
-        public TransactionController(BudgetContext context)
+        private readonly ITransactionRepository _transactionRepository;
+        public TransactionController(ITransactionRepository transactionRepository)
         {
-            _context = context;
+            _transactionRepository = transactionRepository;
         }
 
         public IActionResult Index()
         {
-            var transactions = _context.Transactions.Include(t => t.Category).ToList();
+            var transactions = _transactionRepository.IncludeAll();
 
             foreach (var transaction in transactions)
             {
-                var data = _context.Categories.Find(transaction.CategoryId); //INNER JOIN
-                ViewBag.CategoryName = data?.Name;
+              ViewBag.CategoryName = transaction.Category?.Name;
             }
             return View(transactions);
         }
         public IActionResult Create()
         {
-            var transaction = _context.Transactions.Include(t => t.Category).ToList();
+            //var transaction = _context.Transactions.Include(t => t.Category).ToList();
             return View();
         }
         [HttpPost]
         public IActionResult Create([Bind("Name,Description,Sum,DateTime,CategoryId")] Transaction transaction)
         {
             //transaction.Id = 0;
-            var category = _context.Categories.Find(transaction.CategoryId);
-            if (category == null)
-            {
-                return View();
-            }
-            transaction.Category = category;
             if (ModelState.IsValid)
             {
-                _context.Transactions.Add(transaction);
-                _context.SaveChanges();
+                _transactionRepository.CreateTransaction(transaction);
                 return RedirectToAction(nameof(Index));
             }
             return View(transaction);
         }
         public IActionResult Edit(int id)
         {
-            var data = _context.Transactions.FirstOrDefault(c => c.Id == id);
+            var data = _transactionRepository.FindId(id);
             if (data == null)
             {
                 return NotFound(); //eo internet
@@ -63,18 +56,18 @@ namespace Budget.Controllers
             if (!ModelState.IsValid)
                 return View(newtransaction);
 
-            var exisitngId = _context.Transactions.FirstOrDefault(c => c.Id == id);
+            var exisitngId = _transactionRepository.FindId(id);
             if (exisitngId == null)
                 return View(newtransaction);
 
             exisitngId.Name = newtransaction.Name;
-            _context.SaveChanges();
+            _transactionRepository.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
         //createt function findbyId
         public IActionResult Details(int id)
         {
-            var data = _context.Transactions.FirstOrDefault(t => t.Id == id);
+            var data = _transactionRepository.FindId(id);
             if (data == null)
                 return NotFound();
 
@@ -82,7 +75,7 @@ namespace Budget.Controllers
         }
         public IActionResult Delete(int id)
         {
-            var data = _context.Transactions.FirstOrDefault(t => t.Id == id);
+            var data = _transactionRepository.FindId(id);
             if (data == null)
                 return NotFound();
 
@@ -92,11 +85,11 @@ namespace Budget.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteConfirmed(int id)
         {
-            var data = _context.Transactions.FirstOrDefault(t => t.Id == id);
+            var data = _transactionRepository.FindId(id);
             if (data != null)
             {
-                _context.Transactions.Remove(data);
-                _context.SaveChanges();
+                _transactionRepository.DeleteTransaction(data);
+
             }
             return RedirectToAction(nameof(Index));
         }

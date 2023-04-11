@@ -10,7 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages().WithRazorPagesRoot("/Content");
 builder.Services.AddControllersWithViews();
+//Dependency Injection
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
 //BudgetContext and IdentityContext
 builder.Services.AddDbContext<BudgetContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("myConnString")));
